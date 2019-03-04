@@ -126,4 +126,5 @@ export interface IAudit {
   mobile?: '1' | '0';
   fvonly?: '1' | '0';
   uastring?: string;
+  script?: string;
 }
