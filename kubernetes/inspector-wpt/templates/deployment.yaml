@@ -16,6 +16,7 @@ spec:
       containers:
         - name: inspector-wpt
           image: felicegeracitano/inspector-wpt:0.0.1
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
           resources:
