@@ -1,19 +1,19 @@
 import * as express from 'express';
-import utils from './utils';
+import { IAudit } from 'wpt';
+import { DEFAULT_AUDIT } from './const';
 import DB from './influxdb';
 import Logger from './logger';
-import { IAudit } from './types';
-import { DEFAULT_AUDIT } from './const';
+import utils from './utils';
 const router = express.Router();
 const console = new Logger('[APP Collect Endpoint]: ');
 
 router.get('/', async (req: express.Request, res: express.Response) => {
   const { query = {} } = req;
-  const { url, saveInDB, mobile, fvonly } = { ...DEFAULT_AUDIT, ...query } as IAudit;
+  const { url, saveInDB, mobile, fvonly, uastring } = { ...DEFAULT_AUDIT, ...query } as IAudit;
   if (!url) return res.status(400).send('missing `url` in you request.');
   try {
     console.log(`Audit for ${url}`);
-    const reportJSON = await utils.audit(url, mobile, fvonly);
+    const reportJSON = await utils.audit(url, mobile, fvonly, uastring);
     const parsedReport = utils.parseReport(reportJSON);
     if (saveInDB) DB.saveInDB(url, mobile, fvonly, parsedReport);
     res.status(201).send(parsedReport);
