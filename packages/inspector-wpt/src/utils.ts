@@ -48,12 +48,14 @@ const audit = async (
   url: string,
   mobile: string,
   fvonly: string,
-  uastring?: string
+  uastring?: string,
+  script?: string
 ): Promise<any> => {
   try {
     console.log(`Getting data for ${url}`);
     const agentstring = uastring ? `&uastring=${uastring}` : '';
-    const runTestUrl = `${WPT_SERVER_URL}/runtest.php?f=json&url=${url}&mobile=${mobile}&fvonly=${fvonly}${agentstring}`;
+    const scriptstring = script ? `&script=${script}` : '';
+    const runTestUrl = `${WPT_SERVER_URL}/runtest.php?f=json&url=${url}&mobile=${mobile}&fvonly=${fvonly}${agentstring}${scriptstring}`;
     const runTestResp = await fetch(runTestUrl);
     const runTestRespJSON = (await runTestResp.json()) as IRunTestRespose;
     const audit = await loopUntillGetRespose(runTestRespJSON.data.jsonUrl);
