@@ -118,6 +118,8 @@ export interface IDBPayload {
   content_other_uncompressed: number;
 }
 
+// try to keep same wpt url params for simplicity
+// https://sites.google.com/a/webpagetest.org/docs/advanced-features/webpagetest-restful-apis
 export interface IAudit {
   url: string;
   saveInDB?: boolean;

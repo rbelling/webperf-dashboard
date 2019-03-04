@@ -52,7 +52,7 @@ const audit = async (
 ): Promise<any> => {
   try {
     console.log(`Getting data for ${url}`);
-    const agentstring = uastring && `&uastring=${uastring}`;
+    const agentstring = uastring ? `&uastring=${uastring}` : '';
     const runTestUrl = `${WPT_SERVER_URL}/runtest.php?f=json&url=${url}&mobile=${mobile}&fvonly=${fvonly}${agentstring}`;
     const runTestResp = await fetch(runTestUrl);
     const runTestRespJSON = (await runTestResp.json()) as IRunTestRespose;
