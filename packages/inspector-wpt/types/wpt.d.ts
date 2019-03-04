@@ -117,3 +117,11 @@ export interface IDBPayload {
   content_other_compressed: number;
   content_other_uncompressed: number;
 }
+
+export interface IAudit {
+  url: string;
+  saveInDB?: boolean;
+  mobile?: '1' | '0';
+  fvonly?: '1' | '0';
+  uastring?: string;
+}

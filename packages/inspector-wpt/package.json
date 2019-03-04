@@ -1,6 +1,6 @@
 {
   "name": "inspector-wpt",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "web page test api for webperf dashboard",
   "main": "index.js",
   "scripts": {
