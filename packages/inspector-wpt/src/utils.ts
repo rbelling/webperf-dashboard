@@ -56,7 +56,9 @@ const audit = async (
     const agentstring = uastring ? `&uastring=${uastring}` : '';
     const scriptstring = script ? `&script=${script}` : '';
     const runTestUrl = `${WPT_SERVER_URL}/runtest.php?f=json&url=${url}&mobile=${mobile}&fvonly=${fvonly}${agentstring}${scriptstring}`;
-    const runTestResp = await fetch(runTestUrl);
+    console.log(`WPT API Call: ${runTestUrl}`);
+    // TODO: investigate on node URL https://nodejs.org/api/url.html#url_url_searchparams
+    const runTestResp = await fetch(encodeURI(runTestUrl));
     const runTestRespJSON = (await runTestResp.json()) as IRunTestRespose;
     const audit = await loopUntillGetRespose(runTestRespJSON.data.jsonUrl);
     return audit;
